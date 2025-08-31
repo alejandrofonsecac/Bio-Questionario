@@ -3,6 +3,8 @@ import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import Random from './_components/Random.jsx';
 
+import style from '../src/style/main.module.css'
+
 
 function App() {
 
@@ -163,9 +165,18 @@ function App() {
 
   return (
     <>
-        <div id='Timer'></div>
-        <h1>Quiz de Evoução Humana</h1>
-        <Random perguntas={perguntas} />
+        <div className={style.container}>
+            <h1>Quiz de Evoução Humana</h1>
+
+        </div>
+        
+
+
+        <div style={{display: 'none'}}>
+            <div id='Timer'></div>
+            
+            <Random perguntas={perguntas}/>
+        </div>
     </>
   )
 }
