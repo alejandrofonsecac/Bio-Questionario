@@ -1,0 +1,37 @@
+.opcoes {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.opcao-botao {
+  padding: 10px 15px;
+  border: 2px solid #444;
+  border-radius: 8px;
+  background-color: #f4f4f4;
+  cursor: pointer;
+  text-align: left;
+  transition: 0.2s;
+}
+
+.opcao-botao:hover:not(:disabled) {
+  background-color: #ddd;
+}
+
+.opcao-botao:disabled {
+  cursor: not-allowed;
+}
+
+/* resposta correta */
+.opcao-botao.correto {
+  background-color: #4caf50;
+  color: white;
+  border-color: #4caf50;
+}
+
+/* resposta errada */
+.opcao-botao.errado {
+  background-color: #f44336;
+  color: white;
+  border-color: #f44336;
+}
