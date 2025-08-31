@@ -2,6 +2,10 @@
 
 /*  */
 
+body{
+  overflow: hidden;
+}
+
 .corpo {
   position: relative; 
   min-height: 100vh;
@@ -27,7 +31,6 @@
 
 .container{
   position: relative; 
-  min-height: 100vh;
   width: 100%;
   margin: 0 auto;
   padding: 20px;
