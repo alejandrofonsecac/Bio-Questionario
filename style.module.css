@@ -1,3 +1,41 @@
+@charset "UTF-8";
+
+/*  */
+
+.corpo {
+  position: relative; 
+  min-height: 100vh;
+  width: 100%;
+  margin: 0 auto;
+  padding: 20px;
+  overflow: hidden;
+}
+        
+.corpo::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('./public/cenozoica.png') no-repeat center fixed;
+  background-size: cover;
+  filter: blur(6px);
+  transform: scale(1.05);
+  z-index: -1; 
+  }
+
+.container{
+  position: relative; 
+  min-height: 100vh;
+  width: 100%;
+  margin: 0 auto;
+  padding: 20px;
+  overflow: hidden;
+}
+
+
+/* Random */
 .opcoes {
   display: flex;
   flex-direction: column;

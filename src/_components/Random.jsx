@@ -1,4 +1,5 @@
 import React, { useState, useMemo } from "react";
+import style from '../../style.module.css'
 
 function Random({ perguntas }) {
   const [respostas, setRespostas] = useState({});
