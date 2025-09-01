@@ -4,7 +4,6 @@ import viteLogo from '/vite.svg'
 import Random from './_components/Random.jsx';
 
 import style from '../style.module.css'
-import style from '../main.module.css'
 
 
 function App() {
@@ -173,10 +172,13 @@ function App() {
                 <p>Teste seus conhecimentos sobre a evolução da espécie humana</p>
             </div>
 
-            <div className={style.form}>
+            <div>
                 <label htmlFor="inome"><p>Digite seu nome para começar</p></label>
-                <input type="text" name='nome' id='inome'/>
-                <button className={style.buttonSubmit} type="submit" ></button>
+
+                <div className={style.form}>
+                    <input type="text" name='nome' id='inome' placeholder='Seu nome'/>
+                    <button className={style.buttonSubmit} type="submit" >Iniciar Quiz</button>
+                </div>
             </div>
             
             <div style={{display: 'none'}}>
