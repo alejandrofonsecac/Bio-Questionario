@@ -6,6 +6,7 @@ import Random from './_components/Random.jsx';
 import style from '../style.module.css'
 
 
+
 function App() {
 
     const perguntas = [
@@ -166,13 +167,15 @@ function App() {
   return (
     <>
         <div className={style.corpo}>
-            <div className={style.icon}></div>
-            <div className={style.container}>
-                <h1>Quiz de Evoução Humana</h1>
-                <p>Teste seus conhecimentos sobre a evolução da espécie humana</p>
-            </div>
+            <header>
+                <div className={style.icon}></div>
+                <div className={style.container}>
+                    <h1>Quiz de Evoução Humana</h1>
+                    <p>Teste seus conhecimentos sobre a evolução da espécie humana</p>
+                </div>
+            </header>
 
-            <div>
+            <div className={style.containerForm}>
                 <label htmlFor="inome"><p>Digite seu nome para começar</p></label>
 
                 <div className={style.form}>

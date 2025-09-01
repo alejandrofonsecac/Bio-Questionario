@@ -13,11 +13,34 @@
   --cor-branco: #ffffff;
 }
 
+body{
+  background-color: #e2e2e2;
+}
+
+h1{
+  text-align: center;
+}
+
+p{
+  text-align: center;
+}
+
+.containerForm{
+  background-color: white;
+  width: 600px;
+  height: 500px;
+  margin: 0px auto;
+
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
 
 .icon{
   width: 40px;
   height: 40px;
-  background-color: #E5E7EB;
+  background-color: #fbffc1;
 }
 
 label > p{
@@ -27,10 +50,16 @@ label > p{
 }
 
 .form{
-  width: 400px;
+  background-color: white;
   margin: 16px auto;
   display: flex;
   flex-direction: column;
+}
+
+input{
+  width: 225px;
+  height: 50px;
+  margin: auto;
 }
 
 .buttonSubmit{
