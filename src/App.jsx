@@ -167,8 +167,9 @@ function App() {
   return (
     <>
             <header>
-                <div>
-
+                <div className={style.containerDna}>
+                    <img src="../public/dna.png" alt="Icone de DNA" className={style.iconDna}/>
+                    <p>BiologyQuiz</p>
                 </div>
 
                 <div>
