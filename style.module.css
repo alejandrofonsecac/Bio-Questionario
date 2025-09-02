@@ -152,6 +152,29 @@ input{
   color: gray;
 }
 
+/*--- Footer ---*/
+
+.containerFooter{
+  display: flex;
+  justify-content: space-around;
+}
+
+.containerIcons{
+  display: flex;
+}
+
+.iconeExclamacao > img{
+  width: 40px;
+  height: 40px;
+}
+
+.iconeInterrogacao > img{
+  width: 40px;
+  height: 40px;
+}
+
+
+
 /*  */
 
 .container{
