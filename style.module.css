@@ -156,6 +156,7 @@ input{
 
 footer > p{
   font-family: var(--fonte-normal);
+  font-weight: bold;
   color: rgba(0, 0, 0, 0.705);
 }
 
@@ -166,6 +167,7 @@ footer > p{
 
 .containerIcons{
   display: flex;
+  align-items: center;
 }
 
 .iconeExclamacao > img{

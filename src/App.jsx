@@ -5,7 +5,7 @@ import Random from './_components/Random.jsx';
 
 import style from '../style.module.css'
 
-import { Warning, Help } from "@mui/icons-material";
+import { Error, Help } from "@mui/icons-material";
 
 
 
@@ -209,11 +209,11 @@ function App() {
 
                 <div className={style.containerIcons}>
                     <div className={style.iconeInterrogacao}>
-                        <Warning style={{ fontSize: 30, color: "gray" }} />
+                        <Error style={{ fontSize: 25, color: "gray" }} />
                     </div>
 
                     <div className={style.iconeExclamacao}>
-                        <Help style={{ fontSize: 30, color: "gray" }} />
+                        <Help style={{ fontSize: 25, color: "gray" }} />
                     </div>
                 </div>
             </footer>
