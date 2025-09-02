@@ -172,7 +172,7 @@ function App() {
                     <p>BiologyQuiz</p>
                 </div>
 
-                <div>
+                <div className={style.containerTimer}>
                     <img src="../public/relogio.png" alt="Icone de relogio" className={style.iconTimer} />
                     <div id='Timer'></div>
                 </div>
@@ -180,8 +180,8 @@ function App() {
 
                 <div className={style.containerIcon}>
                     <div className={style.icon}><img src="../public/cerebro.png" alt="Icone de Cerebro" /></div>
-                    <h1>Quiz de Evoução Humana</h1>
-                    <p>Teste seus conhecimentos sobre a evolução da espécie humana</p>
+                    <h1>Quiz de Evoução <br/>Humana</h1>
+                    <p>Teste seus conhecimentos sobre a evolução da <br/> espécie humana</p>
                 </div>
 
             <div className={style.containerForm}>                
@@ -192,6 +192,8 @@ function App() {
                     
                     <button className={style.buttonSubmit} type="submit" >Iniciar Quiz</button>
                 </div>
+
+                <p>10 perguntas • 5 minutos • Múltipla Escolha</p>
             </div>
             
             <div style={{display: 'none'}}>
@@ -199,6 +201,11 @@ function App() {
             
                 <Random perguntas={perguntas}/>
             </div>
+
+            <footer>
+                <p>© 2025 BiologyQuiz. Ferramenta Educacional</p>
+                
+            </footer>
     </>
   )
 }
