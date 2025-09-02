@@ -53,8 +53,8 @@ header{
 }
 
 .iconTimer{
-  width: 30px;
-  height: 30px;
+  width: 25x;
+  height: 25px;
 }
 
 
@@ -153,6 +153,11 @@ input{
 }
 
 /*--- Footer ---*/
+
+footer > p{
+  font-family: var(--fonte-normal);
+  color: rgba(0, 0, 0, 0.705);
+}
 
 .containerFooter{
   display: flex;
