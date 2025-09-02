@@ -202,9 +202,18 @@ function App() {
                 <Random perguntas={perguntas}/>
             </div>
 
-            <footer>
+            <footer  className={style.containerFooter}>
                 <p>© 2025 BiologyQuiz. Ferramenta Educacional</p>
-                
+
+                <div className={style.containerIcons}>
+                    <div className={style.iconeInterrogacao}>
+                        <img src="../public/iconeInterrogacao.png" alt="Icone de Interrogação" />
+                    </div>
+
+                    <div className={style.iconeExclamacao}>
+                        <img src="../public/iconeExclamacao.png" alt="Icone de Exclamação" />
+                    </div>
+                </div>
             </footer>
     </>
   )
