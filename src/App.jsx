@@ -166,20 +166,29 @@ function App() {
 
   return (
     <>
-        <div className={style.corpo}>
             <header>
-                <div className={style.icon}></div>
-                <div className={style.container}>
-                    <h1>Quiz de Evoução Humana</h1>
-                    <p>Teste seus conhecimentos sobre a evolução da espécie humana</p>
+                <div>
+
+                </div>
+
+                <div>
+                    <img src="../public/relogio.png" alt="Icone de relogio" className={style.iconTimer} />
+                    <div id='Timer'></div>
                 </div>
             </header>
 
-            <div className={style.containerForm}>
-                <label htmlFor="inome"><p>Digite seu nome para começar</p></label>
+                <div className={style.containerIcon}>
+                    <div className={style.icon}><img src="../public/cerebro.png" alt="Icone de Cerebro" /></div>
+                    <h1>Quiz de Evoução Humana</h1>
+                    <p>Teste seus conhecimentos sobre a evolução da espécie humana</p>
+                </div>
 
+            <div className={style.containerForm}>                
                 <div className={style.form}>
-                    <input type="text" name='nome' id='inome' placeholder='Seu nome'/>
+                    <label htmlFor="inome"><p>Digite seu nome para começar</p>
+                        <input type="text" name='nome' id='inome' placeholder='Seu nome'/>
+                    </label>
+                    
                     <button className={style.buttonSubmit} type="submit" >Iniciar Quiz</button>
                 </div>
             </div>
@@ -189,7 +198,6 @@ function App() {
             
                 <Random perguntas={perguntas}/>
             </div>
-        </div>
     </>
   )
 }
