@@ -1,25 +1,31 @@
 import React, { useState, useMemo } from "react";
-import style from '../style.module.css';
+import style from '../../style.module.css';
 
 function Random({ perguntas, onFinish, nome, disabled }) {
   const [respostas, setRespostas] = useState({});
 
+  // Embaralha só uma vez quando o componente é montado
   const perguntasSelecionadas = useMemo(() => {
-    const arr = [...perguntas];
-    for (let i = arr.length - 1; i > 0; i--) {
+    const perguntasEmbaralhadas = [...perguntas];
+    for (let i = perguntasEmbaralhadas.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
-      [arr[i], arr[j]] = [arr[j], arr[i]];
+      [perguntasEmbaralhadas[i], perguntasEmbaralhadas[j]] =
+        [perguntasEmbaralhadas[j], perguntasEmbaralhadas[i]];
     }
-    return arr.slice(0, 10);
+    return perguntasEmbaralhadas.slice(0, 10);
   }, [perguntas]);
 
   const handleClick = (perguntaId, opcao) => {
-    setRespostas(prev => ({ ...prev, [perguntaId]: opcao }));
+    setRespostas(prev => ({
+      ...prev,
+      [perguntaId]: opcao
+    }));
   };
 
   const todasRespondidas = perguntasSelecionadas.every(p => !!respostas[p.id]);
 
   function finalizarEnvio() {
+    if (!onFinish) return;
     const rows = perguntasSelecionadas.map(p => {
       const sel = respostas[p.id] || null;
       const corretaObj = p.opcoes.find(o => o.correta);
@@ -33,25 +39,39 @@ function Random({ perguntas, onFinish, nome, disabled }) {
     });
     const score = rows.filter(r => r.isCorrect).length;
     const total = perguntasSelecionadas.length;
-    onFinish?.({ rows, score, total });
+    onFinish({ rows, score, total });
   }
 
   return (
-    <div className={style.quizWrapper}>
-      {perguntasSelecionadas.map((pergunta, idx) => (
-        <div key={pergunta.id} className={style.perguntaCard}>
-          <h3>{idx + 1}. {pergunta.pergunta}</h3>
+    <div id="quiz" className={style.container}>
+      {perguntasSelecionadas.map((pergunta, index) => (
+        <div key={pergunta.id} style={{
+          background: '#fff',
+          border: '1px solid #e5e7eb',
+          borderRadius: '10px',
+          padding: '14px',
+          marginBottom: '12px',
+          boxShadow: '0 6px 18px rgba(0,0,0,0.06)'
+        }}>
+          <h3 style={{ margin: '0 0 10px 0', fontFamily: 'var(--fonte-titulo)', fontWeight: 600 }}>
+            {index + 1}. {pergunta.pergunta}
+          </h3>
 
           <div className={style.opcoes}>
-            {pergunta.opcoes.map((opcao, i) => {
+            {pergunta.opcoes.map((opcao, opcaoIndex) => {
               const resposta = respostas[pergunta.id];
-              let className = style.opcao;
+
+              // base class (com hífen) precisa de bracket-notation
+              let className = style['opcao-botao'];
+
+              // adicionar o modificador (correto/errado) – CSS tem ".opcao-botao.correto/errado"
               if (resposta && resposta.texto === opcao.texto) {
                 className += ' ' + (resposta.correta ? style.correto : style.errado);
               }
+
               return (
                 <button
-                  key={i}
+                  key={opcaoIndex}
                   onClick={() => handleClick(pergunta.id, opcao)}
                   className={className}
                   disabled={!!resposta || disabled}
@@ -64,16 +84,19 @@ function Random({ perguntas, onFinish, nome, disabled }) {
         </div>
       ))}
 
-      <div className={style.footerQuiz}>
-        <button
-          className={style.buttonSubmit}
-          onClick={finalizarEnvio}
-          disabled={!todasRespondidas || disabled}
-          title={!todasRespondidas ? 'Responda todas as questões' : 'Enviar respostas'}
-        >
-          Finalizar e Enviar
-        </button>
-      </div>
+      {/* Botão Finalizar (opcional) — só mostra quando todas respondidas e se onFinish existir */}
+      {typeof onFinish === 'function' && (
+        <div style={{ display: 'flex', justifyContent: 'center', marginTop: 16 }}>
+          <button
+            className={style.buttonSubmit}
+            onClick={finalizarEnvio}
+            disabled={!todasRespondidas || disabled}
+            title={!todasRespondidas ? 'Responda todas as questões' : 'Enviar respostas'}
+          >
+            Finalizar e Enviar
+          </button>
+        </div>
+      )}
     </div>
   );
 }
