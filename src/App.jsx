@@ -2,15 +2,6 @@ import { useState } from 'react'
 import Random from './_components/Random.jsx'
 import style from '../style.module.css'
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-import { Error, Help } from "@mui/icons-material";
-=======
-
->>>>>>> parent of f6b7745 (.)
-
-=======
->>>>>>> parent of 904f2bf (Resolvendo bugs de estilo)
 function App() {
   const [name, setName] = useState('')
   const [started, setStarted] = useState(false)
@@ -227,24 +218,11 @@ function App() {
           </div>
         </header>
 
-<<<<<<< HEAD
-        <main>
-            <div className={style.containerIcon}>
-              <img src="../../public/cerebro.png" alt="Icone de Cerebro"/>
-            </div>
-
-<<<<<<< HEAD
-            <h1>Quiz de Evolução Humana</h1>
-            <p>Teste seus conhecimentos sobre a evolução da espécie humana</p>
-        </main>
-=======
         <div className={style.containerIcon}>
           <h1 className={style.tituloRock}>Quiz de Evolução Humana</h1>
           <p>Teste seus conhecimentos sobre a evolução da espécie humana</p>
         </div>
->>>>>>> parent of 904f2bf (Resolvendo bugs de estilo)
 
-<<<<<<< HEAD
         {/* TELA INICIAL: aparece até clicar no botão */}
         {!started && (
           <form id="form-jogador" onSubmit={handleStart}>
@@ -279,30 +257,8 @@ function App() {
             </div>
           </div>
         </footer>
-<<<<<<< HEAD
-        </>
-=======
-                <div className={style.containerIcons}>
-                    <div className={style.iconeInterrogacao}>
-                        <img src="../public/iconeInterrogacao.png" alt="Icone de Interrogação" />
-                    </div>
-
-                    <div className={style.iconeExclamacao}>
-                        <img src="../public/iconeExclamacao.png" alt="Icone de Exclamação" />
-                    </div>
-                </div>
-=======
-            <footer>
-                <p>© 2025 BiologyQuiz. Ferramenta Educacional</p>
-                
->>>>>>> parent of 819eb9d (Exportação de icones no foter)
-            </footer>
-    </>
->>>>>>> parent of f6b7745 (.)
-=======
       </div>
     </div>
->>>>>>> parent of 904f2bf (Resolvendo bugs de estilo)
   )
 }
 
