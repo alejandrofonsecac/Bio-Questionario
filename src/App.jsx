@@ -2,7 +2,11 @@ import { useState } from 'react'
 import Random from './_components/Random.jsx'
 import style from '../style.module.css'
 
+<<<<<<< HEAD
 import { Error, Help } from "@mui/icons-material";
+=======
+
+>>>>>>> parent of f6b7745 (.)
 
 function App() {
   const [name, setName] = useState('')
@@ -242,6 +246,7 @@ function App() {
             <p>Teste seus conhecimentos sobre a evolução da espécie humana</p>
         </main>
 
+<<<<<<< HEAD
         {/* TELA INICIAL: aparece até clicar no botão */}
         {!started && (
           <form id="form-jogador" onSubmit={handleStart} className={style.containerForm}>
@@ -278,6 +283,19 @@ function App() {
           </div>
         </footer>
         </>
+=======
+                <div className={style.containerIcons}>
+                    <div className={style.iconeInterrogacao}>
+                        <img src="../public/iconeInterrogacao.png" alt="Icone de Interrogação" />
+                    </div>
+
+                    <div className={style.iconeExclamacao}>
+                        <img src="../public/iconeExclamacao.png" alt="Icone de Exclamação" />
+                    </div>
+                </div>
+            </footer>
+    </>
+>>>>>>> parent of f6b7745 (.)
   )
 }
 

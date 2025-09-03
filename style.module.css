@@ -53,6 +53,7 @@ header{
 }
 
 .iconTimer{
+<<<<<<< HEAD
   width: 20px;
   height: 20px;
 }
@@ -61,6 +62,10 @@ header{
   font-family: var(--fonte-normal);
   color: rgba(0, 0, 0, 0.7);
   font-size: 0.8em;
+=======
+  width: 30px;
+  height: 30px;
+>>>>>>> parent of f6b7745 (.)
 }
 
 
@@ -156,12 +161,15 @@ input{
 
 /*--- Footer ---*/
 
+<<<<<<< HEAD
 footer > p{
   font-family: var(--fonte-normal);
   font-weight: bold;
   color: rgba(0, 0, 0, 0.705);
 }
 
+=======
+>>>>>>> parent of f6b7745 (.)
 .containerFooter{
   display: flex;
   justify-content: space-around;
