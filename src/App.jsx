@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import Random from './_components/Random.jsx'
-import style from '../style.module.css'
+import style from './style.module.css'
 
 import { Error, Help } from "@mui/icons-material";
 

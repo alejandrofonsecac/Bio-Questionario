@@ -16,7 +16,7 @@
 }
 
 /* ---------- Globais (mantidos como no CSS antigo) ---------- */
-:global(html), :global(body) {
+:global(html), :globalbody {
   height: 100%;
   min-height: 100vh;
   margin: 0;
