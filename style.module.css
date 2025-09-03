@@ -159,6 +159,7 @@ input{
   margin: 16px auto;
 }
 
+<<<<<<< HEAD
 /*--- Footer ---*/
 
 <<<<<<< HEAD
@@ -194,6 +195,12 @@ footer > p{
 
 
 
+=======
+.containerForm{
+  color: gray;
+}
+
+>>>>>>> parent of 819eb9d (Exportação de icones no foter)
 /*  */
 
 .container{

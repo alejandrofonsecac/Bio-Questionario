@@ -242,6 +242,7 @@ function App() {
               <img src="../../public/cerebro.png" alt="Icone de Cerebro"/>
             </div>
 
+<<<<<<< HEAD
             <h1>Quiz de Evolução Humana</h1>
             <p>Teste seus conhecimentos sobre a evolução da espécie humana</p>
         </main>
@@ -293,6 +294,11 @@ function App() {
                         <img src="../public/iconeExclamacao.png" alt="Icone de Exclamação" />
                     </div>
                 </div>
+=======
+            <footer>
+                <p>© 2025 BiologyQuiz. Ferramenta Educacional</p>
+                
+>>>>>>> parent of 819eb9d (Exportação de icones no foter)
             </footer>
     </>
 >>>>>>> parent of f6b7745 (.)
