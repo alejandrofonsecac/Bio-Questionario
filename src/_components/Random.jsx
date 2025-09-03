@@ -1,19 +1,17 @@
 import React, { useState, useMemo } from "react";
-import style from '../../style.module.css'
+import style from '../../style.module.css';
 
-function Random({ perguntas }) {
+function Random({ perguntas, onFinish, nome, disabled }) {
   const [respostas, setRespostas] = useState({});
 
   // Embaralha só uma vez quando o componente é montado
   const perguntasSelecionadas = useMemo(() => {
     const perguntasEmbaralhadas = [...perguntas];
-
     for (let i = perguntasEmbaralhadas.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
       [perguntasEmbaralhadas[i], perguntasEmbaralhadas[j]] =
         [perguntasEmbaralhadas[j], perguntasEmbaralhadas[i]];
     }
-
     return perguntasEmbaralhadas.slice(0, 10);
   }, [perguntas]);
 
@@ -24,19 +22,51 @@ function Random({ perguntas }) {
     }));
   };
 
-  return (
-    <div id="quiz">
-      {perguntasSelecionadas.map((pergunta, index) => (
-        <div key={pergunta.id} className="pergunta-card">
-          <h3>{index + 1}. {pergunta.pergunta}</h3>
+  const todasRespondidas = perguntasSelecionadas.every(p => !!respostas[p.id]);
 
-          <div className="opcoes">
+  function finalizarEnvio() {
+    if (!onFinish) return;
+    const rows = perguntasSelecionadas.map(p => {
+      const sel = respostas[p.id] || null;
+      const corretaObj = p.opcoes.find(o => o.correta);
+      return {
+        qid: p.id,
+        question: p.pergunta,
+        selected: sel ? sel.texto : null,
+        correct: corretaObj ? corretaObj.texto : null,
+        isCorrect: sel ? !!sel.correta : false,
+      };
+    });
+    const score = rows.filter(r => r.isCorrect).length;
+    const total = perguntasSelecionadas.length;
+    onFinish({ rows, score, total });
+  }
+
+  return (
+    <div id="quiz" className={style.container}>
+      {perguntasSelecionadas.map((pergunta, index) => (
+        <div key={pergunta.id} style={{
+          background: '#fff',
+          border: '1px solid #e5e7eb',
+          borderRadius: '10px',
+          padding: '14px',
+          marginBottom: '12px',
+          boxShadow: '0 6px 18px rgba(0,0,0,0.06)'
+        }}>
+          <h3 style={{ margin: '0 0 10px 0', fontFamily: 'var(--fonte-titulo)', fontWeight: 600 }}>
+            {index + 1}. {pergunta.pergunta}
+          </h3>
+
+          <div className={style.opcoes}>
             {pergunta.opcoes.map((opcao, opcaoIndex) => {
               const resposta = respostas[pergunta.id];
-              let className = "opcao-botao";
 
+              // base class (com hífen) precisa de bracket-notation
+              let className = style['opcao-botao'];
+
+              // adicionar o modificador (correto/errado) – CSS tem ".opcao-botao.correto/errado"
               if (resposta && resposta.texto === opcao.texto) {
-                className += resposta.correta ? " correto" : " errado";
+                className += ' ' + (resposta.correta ? style.correto : style.errado);
               }
 
               return (
@@ -44,7 +74,7 @@ function Random({ perguntas }) {
                   key={opcaoIndex}
                   onClick={() => handleClick(pergunta.id, opcao)}
                   className={className}
-                  disabled={!!resposta}
+                  disabled={!!resposta || disabled}
                 >
                   {opcao.texto}
                 </button>
@@ -53,6 +83,20 @@ function Random({ perguntas }) {
           </div>
         </div>
       ))}
+
+      {/* Botão Finalizar (opcional) — só mostra quando todas respondidas e se onFinish existir */}
+      {typeof onFinish === 'function' && (
+        <div style={{ display: 'flex', justifyContent: 'center', marginTop: 16 }}>
+          <button
+            className={style.buttonSubmit}
+            onClick={finalizarEnvio}
+            disabled={!todasRespondidas || disabled}
+            title={!todasRespondidas ? 'Responda todas as questões' : 'Enviar respostas'}
+          >
+            Finalizar e Enviar
+          </button>
+        </div>
+      )}
     </div>
   );
 }

@@ -4,6 +4,12 @@ import os
 import firebase_admin
 from firebase_admin import credentials, firestore
 from datetime import datetime, timezone
+from flask_cors import CORS
+
+
+
+app = Flask(__name__)
+
 
 # Carregar variáveis do .env
 load_dotenv()
@@ -13,12 +19,31 @@ FIREBASE_CRED = os.getenv("FIREBASE_CRED")
 if not FIREBASE_CRED or not os.path.exists(FIREBASE_CRED):
     raise RuntimeError("Defina FIREBASE_CRED no .env apontando para o JSON da chave privada")
 
+
+CORS(app,
+     resources={r"/*": {"origins": ["http://localhost:5173", "http://127.0.0.1:5173"]}},
+     supports_credentials=False,  # geralmente não precisa de cookies
+     methods=["GET", "POST", "OPTIONS"],
+     allow_headers=["Content-Type", "Authorization"])
+
 # Inicializar Firebase
 cred = credentials.Certificate(FIREBASE_CRED)
 firebase_admin.initialize_app(cred)
 db = firestore.client()
 
 app = Flask(__name__, static_folder="static", template_folder="templates")
+
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=5001, debug=True)
+
+@app.errorhandler(404)
+def nf(e): return jsonify({"sucesso": False, "erro": "Rota não encontrada"}), 404
+
+@app.errorhandler(405)
+def mm(e): return jsonify({"sucesso": False, "erro": "Método não permitido"}), 405
+
+@app.errorhandler(500)
+def se(e): return jsonify({"sucesso": False, "erro": "Erro interno"}), 500
 
 COLLECTION = "quizResults"  # "tabela" (coleção) do Firestore
 
@@ -118,3 +143,16 @@ def get_ranking():
 
 if __name__ == "__main__":
     app.run(debug=True)
+
+
+@app.errorhandler(404)
+def not_found(e):
+    return jsonify({"sucesso": False, "erro": "Rota não encontrada"}), 404
+
+@app.errorhandler(405)
+def method_not_allowed(e):
+    return jsonify({"sucesso": False, "erro": "Método não permitido"}), 405
+
+@app.errorhandler(500)
+def server_error(e):
+    return jsonify({"sucesso": False, "erro": "Erro interno no servidor"}), 500
