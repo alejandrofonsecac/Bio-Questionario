@@ -3,11 +3,14 @@ import Random from './_components/Random.jsx'
 import style from '../style.module.css'
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 import { Error, Help } from "@mui/icons-material";
 =======
 
 >>>>>>> parent of f6b7745 (.)
 
+=======
+>>>>>>> parent of 904f2bf (Resolvendo bugs de estilo)
 function App() {
   const [name, setName] = useState('')
   const [started, setStarted] = useState(false)
@@ -222,7 +225,8 @@ function App() {
 
 
   return (
-    <>
+    <div className="corpo">
+      <div className={style.container}>
         <header>
           <div className={style.containerDna}>
             <img src="/dna.png" alt="Icone de DNA" className={style.iconDna}/>
@@ -231,12 +235,11 @@ function App() {
           <div className={style.containerTimer}>
             <img src="/relogio.png" alt="Icone de relogio" className={style.iconTimer} />
             {/* Exemplo de timer fixo; substitua por componente se quiser */}
-            <div id="Timer">
-              <span className="timerText">05:00</span>
-            </div>
+            <div id="Timer"><span className="timerText">05:00</span></div>
           </div>
         </header>
 
+<<<<<<< HEAD
         <main>
             <div className={style.containerIcon}>
               <img src="../../public/cerebro.png" alt="Icone de Cerebro"/>
@@ -246,20 +249,25 @@ function App() {
             <h1>Quiz de Evolução Humana</h1>
             <p>Teste seus conhecimentos sobre a evolução da espécie humana</p>
         </main>
+=======
+        <div className={style.containerIcon}>
+          <h1 className={style.tituloRock}>Quiz de Evolução Humana</h1>
+          <p>Teste seus conhecimentos sobre a evolução da espécie humana</p>
+        </div>
+>>>>>>> parent of 904f2bf (Resolvendo bugs de estilo)
 
 <<<<<<< HEAD
         {/* TELA INICIAL: aparece até clicar no botão */}
         {!started && (
-          <form id="form-jogador" onSubmit={handleStart} className={style.containerForm}>
+          <form id="form-jogador" onSubmit={handleStart}>
             <input
               type="text"
               id="inome"
               placeholder="Seu nome"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              className={style.input}
             />
-            <button type="submit" className={style.buttonSubmit}>Iniciar Quiz</button>
+            <button type="submit">Iniciar Quiz</button>
           </form>
         )}
 
@@ -276,13 +284,14 @@ function App() {
           <p>© 2025 BiologyQuiz. Ferramenta Educacional</p>
           <div className={style.containerIcons}>
             <div className={style.iconeInterrogacao}>
-              <Help/>
+              <img src="/iconeInterrogacao.png" alt="Icone de Interrogação" />
             </div>
             <div className={style.iconeExclamacao}>
-              <Error/>
+              <img src="/iconeExclamacao.png" alt="Icone de Exclamação" />
             </div>
           </div>
         </footer>
+<<<<<<< HEAD
         </>
 =======
                 <div className={style.containerIcons}>
@@ -302,6 +311,10 @@ function App() {
             </footer>
     </>
 >>>>>>> parent of f6b7745 (.)
+=======
+      </div>
+    </div>
+>>>>>>> parent of 904f2bf (Resolvendo bugs de estilo)
   )
 }
 
