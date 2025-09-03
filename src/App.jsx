@@ -2,15 +2,8 @@ import { useState } from 'react'
 import Random from './_components/Random.jsx'
 import style from '../style.module.css'
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 import { Error, Help } from "@mui/icons-material";
-=======
 
->>>>>>> parent of f6b7745 (.)
-
-=======
->>>>>>> parent of 904f2bf (Resolvendo bugs de estilo)
 function App() {
   const [name, setName] = useState('')
   const [started, setStarted] = useState(false)
@@ -178,41 +171,54 @@ function App() {
   }
 
   // (Opcional) Enviar resultado ao finalizar
-   async function handleFinish({ score, total }) {
-    const finishedAt = new Date().toISOString()
-    const durationSeconds = (new Date(finishedAt) - new Date(startedAt)) / 1000
+ async function handleFinish({ score, total }) {
+  const finishedAt = new Date().toISOString()
+  const durationSeconds = (new Date(finishedAt) - new Date(startedAt)) / 1000
 
-    const payload = { nome: name, score, total, durationSeconds, startedAt, finishedAt }
-
-    let res, body
-    try {
-      res = await fetch("http://localhost:5001/salvar_resultado", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
-      })
-
-      const ct = res.headers.get("content-type") || ""
-      if (ct.includes("application/json")) {
-        body = await res.json()
-      } else {
-        const text = await res.text()
-        try { body = JSON.parse(text) } catch { body = { raw: text } }
-      }
-    } catch (e) {
-      alert("Falha de rede ou CORS: " + (e?.message || e))
-      return
-    }
-
-    if (!res.ok || body?.sucesso === false) {
-      alert("Erro ao enviar: " + (body?.erro || `HTTP ${res.status}`))
-      return
-    }
-
-    alert("Enviado! id: " + (body?.id || "(sem id)"))
+  const payload = {
+    nome: name,
+    score,
+    total,
+    durationSeconds,
+    startedAt,
+    finishedAt,
   }
 
+  let res, body
+  try {
+    res = await fetch("http://localhost:5001/salvar_resultado", { // use URL absoluta no dev
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
+    })
+
+    // Parse seguro (JSON se houver; senão, texto)
+    const ct = res.headers.get("content-type") || ""
+    if (ct.includes("application/json")) {
+      body = await res.json()
+    } else {
+      const text = await res.text()
+      // tente JSON; se não der, mantém texto
+      try { body = JSON.parse(text) } catch { body = { raw: text } }
+    }
+  } catch (e) {
+    alert("Falha de rede ou CORS: " + (e?.message || e))
+    return
+  }
+
+  if (!res.ok || (body && body.sucesso === false)) {
+    const msg = (body && (body.erro || body.message)) || `HTTP ${res.status}`
+    alert("Erro ao enviar: " + msg)
+    return
+  }
+
+  const id = body?.id || "(sem id)"
+  alert(`Enviado! id: ${id}`)
+}
+
+
   return (
+    <>
     <div className="corpo">
       <div className={style.container}>
         <header>
@@ -227,24 +233,19 @@ function App() {
           </div>
         </header>
 
-<<<<<<< HEAD
+
         <main>
             <div className={style.containerIcon}>
               <img src="../../public/cerebro.png" alt="Icone de Cerebro"/>
             </div>
 
-<<<<<<< HEAD
             <h1>Quiz de Evolução Humana</h1>
             <p>Teste seus conhecimentos sobre a evolução da espécie humana</p>
         </main>
-=======
         <div className={style.containerIcon}>
           <h1 className={style.tituloRock}>Quiz de Evolução Humana</h1>
           <p>Teste seus conhecimentos sobre a evolução da espécie humana</p>
         </div>
->>>>>>> parent of 904f2bf (Resolvendo bugs de estilo)
-
-<<<<<<< HEAD
         {/* TELA INICIAL: aparece até clicar no botão */}
         {!started && (
           <form id="form-jogador" onSubmit={handleStart}>
@@ -279,9 +280,6 @@ function App() {
             </div>
           </div>
         </footer>
-<<<<<<< HEAD
-        </>
-=======
                 <div className={style.containerIcons}>
                     <div className={style.iconeInterrogacao}>
                         <img src="../public/iconeInterrogacao.png" alt="Icone de Interrogação" />
@@ -291,18 +289,11 @@ function App() {
                         <img src="../public/iconeExclamacao.png" alt="Icone de Exclamação" />
                     </div>
                 </div>
-=======
             <footer>
                 <p>© 2025 BiologyQuiz. Ferramenta Educacional</p>
                 
->>>>>>> parent of 819eb9d (Exportação de icones no foter)
             </footer>
     </>
->>>>>>> parent of f6b7745 (.)
-=======
-      </div>
-    </div>
->>>>>>> parent of 904f2bf (Resolvendo bugs de estilo)
   )
 }
 
