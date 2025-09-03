@@ -53,8 +53,24 @@ header{
 }
 
 .iconTimer{
+<<<<<<< HEAD
+<<<<<<< HEAD
+  width: 20px;
+  height: 20px;
+}
+
+.timerText{
+  font-family: var(--fonte-normal);
+  color: rgba(0, 0, 0, 0.7);
+  font-size: 0.8em;
+=======
+  width: 30px;
+  height: 30px;
+>>>>>>> parent of f6b7745 (.)
+=======
   width: 25x;
   height: 25px;
+>>>>>>> parent of 904f2bf (Resolvendo bugs de estilo)
 }
 
 
@@ -148,18 +164,25 @@ input{
   margin: 16px auto;
 }
 
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
 .containerForm{
   color: gray;
 }
 
+>>>>>>> parent of 904f2bf (Resolvendo bugs de estilo)
 /*--- Footer ---*/
 
+<<<<<<< HEAD
 footer > p{
   font-family: var(--fonte-normal);
   font-weight: bold;
   color: rgba(0, 0, 0, 0.705);
 }
 
+=======
+>>>>>>> parent of f6b7745 (.)
 .containerFooter{
   display: flex;
   justify-content: space-around;
@@ -182,6 +205,12 @@ footer > p{
 
 
 
+=======
+.containerForm{
+  color: gray;
+}
+
+>>>>>>> parent of 819eb9d (Exportação de icones no foter)
 /*  */
 
 .container{
