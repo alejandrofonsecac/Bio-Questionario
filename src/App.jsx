@@ -219,8 +219,6 @@ function App() {
 
   return (
     <>
-    <div className="corpo">
-      <div className={style.container}>
         <header>
           <div className={style.containerDna}>
             <img src="/dna.png" alt="Icone de DNA" className={style.iconDna}/>
@@ -229,7 +227,9 @@ function App() {
           <div className={style.containerTimer}>
             <img src="/relogio.png" alt="Icone de relogio" className={style.iconTimer} />
             {/* Exemplo de timer fixo; substitua por componente se quiser */}
-            <div id="Timer"><span className="timerText">05:00</span></div>
+            <div id="Timer">
+              <span className="timerText">05:00</span>
+            </div>
           </div>
         </header>
 
@@ -246,6 +246,7 @@ function App() {
           <h1 className={style.tituloRock}>Quiz de Evolução Humana</h1>
           <p>Teste seus conhecimentos sobre a evolução da espécie humana</p>
         </div>
+
         {/* TELA INICIAL: aparece até clicar no botão */}
         {!started && (
           <form id="form-jogador" onSubmit={handleStart}>
@@ -271,30 +272,18 @@ function App() {
 
         <footer className={style.containerFooter}>
           <p>© 2025 BiologyQuiz. Ferramenta Educacional</p>
+
           <div className={style.containerIcons}>
             <div className={style.iconeInterrogacao}>
-              <img src="/iconeInterrogacao.png" alt="Icone de Interrogação" />
+              <Help/>
             </div>
             <div className={style.iconeExclamacao}>
-              <img src="/iconeExclamacao.png" alt="Icone de Exclamação" />
+              <Error/>              
             </div>
           </div>
         </footer>
-                <div className={style.containerIcons}>
-                    <div className={style.iconeInterrogacao}>
-                        <img src="../public/iconeInterrogacao.png" alt="Icone de Interrogação" />
-                    </div>
-
-                    <div className={style.iconeExclamacao}>
-                        <img src="../public/iconeExclamacao.png" alt="Icone de Exclamação" />
-                    </div>
-                </div>
-            <footer>
-                <p>© 2025 BiologyQuiz. Ferramenta Educacional</p>
-                
-            </footer>
     </>
   )
 }
 
-export default App
+export default App;
