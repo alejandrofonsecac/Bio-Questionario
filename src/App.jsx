@@ -169,51 +169,39 @@ function App() {
   }
 
   // (Opcional) Enviar resultado ao finalizar
- async function handleFinish({ score, total }) {
-  const finishedAt = new Date().toISOString()
-  const durationSeconds = (new Date(finishedAt) - new Date(startedAt)) / 1000
+   async function handleFinish({ score, total }) {
+    const finishedAt = new Date().toISOString()
+    const durationSeconds = (new Date(finishedAt) - new Date(startedAt)) / 1000
 
-  const payload = {
-    nome: name,
-    score,
-    total,
-    durationSeconds,
-    startedAt,
-    finishedAt,
-  }
+    const payload = { nome: name, score, total, durationSeconds, startedAt, finishedAt }
 
-  let res, body
-  try {
-    res = await fetch("http://localhost:5001/salvar_resultado", { // use URL absoluta no dev
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload),
-    })
+    let res, body
+    try {
+      res = await fetch("http://localhost:5001/salvar_resultado", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      })
 
-    // Parse seguro (JSON se houver; senão, texto)
-    const ct = res.headers.get("content-type") || ""
-    if (ct.includes("application/json")) {
-      body = await res.json()
-    } else {
-      const text = await res.text()
-      // tente JSON; se não der, mantém texto
-      try { body = JSON.parse(text) } catch { body = { raw: text } }
+      const ct = res.headers.get("content-type") || ""
+      if (ct.includes("application/json")) {
+        body = await res.json()
+      } else {
+        const text = await res.text()
+        try { body = JSON.parse(text) } catch { body = { raw: text } }
+      }
+    } catch (e) {
+      alert("Falha de rede ou CORS: " + (e?.message || e))
+      return
     }
-  } catch (e) {
-    alert("Falha de rede ou CORS: " + (e?.message || e))
-    return
+
+    if (!res.ok || body?.sucesso === false) {
+      alert("Erro ao enviar: " + (body?.erro || `HTTP ${res.status}`))
+      return
+    }
+
+    alert("Enviado! id: " + (body?.id || "(sem id)"))
   }
-
-  if (!res.ok || (body && body.sucesso === false)) {
-    const msg = (body && (body.erro || body.message)) || `HTTP ${res.status}`
-    alert("Erro ao enviar: " + msg)
-    return
-  }
-
-  const id = body?.id || "(sem id)"
-  alert(`Enviado! id: ${id}`)
-}
-
 
   return (
     <div className="corpo">
