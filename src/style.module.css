@@ -1,260 +1,101 @@
 @charset "UTF-8";
-@import url('https://fonts.googleapis.com/css2?family=Rock+Salt&display=swap');
 
+*{
+  box-sizing: border-box;
+}
 
-/* Paleta e fontes */
-:root{
-  --background-color: rgba(233, 255, 227, 0.9);
-  --text-color: rgb(0, 151, 0);
-  --font: 'Rock Salt', cursive;
+ body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
 
-  /* extras que você já usava */
+:root {
+  /* Tipografias */
   --fonte-titulo: 'Montserrat', sans-serif;
   --fonte-normal: 'Roboto', sans-serif;
+
+  /* Paleta de cores */
   --cor-azul-petroleo: #111827;
+  --cor-verde-esmeralda: #3bb273;
+  --cor-amarelo-suave: #f1c40f;
+  --cor-cinza-claro: #f4f4f4;
   --cor-branco: #ffffff;
 }
 
-/* ---------- Globais (mantidos como no CSS antigo) ---------- */
-:global(html), :globalbody {
-  height: 100%;
-  min-height: 100vh;
-  margin: 0;
-  padding: 0;
-}
-:global(body) {
-  font-family: Arial, sans-serif;
-  overflow-x: hidden;
-  background-color: #fff;
-}
-
-/* Wrapper com fundo borrado */
-:global(.corpo) {
-  position: relative; 
-  min-height: 100vh;
-  width: 100%;
-  margin: 0 auto;
-  padding: 20px;
-  overflow: hidden;
-}
-:global(.corpo)::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: url('/imagens/cenozoica.png') no-repeat center center fixed;
-  background-size: cover;
-  filter: blur(6px);
-  transform: scale(1.05);
-  z-index: -1; 
-}
-
-/* Container central */
-.container {
+header{
   display: flex;
-  flex-direction: column;
-  gap: 16px;
-  align-items: stretch;
-  justify-content: flex-start;
-
-  background: var(--background-color);
-  width: min(100%, 900px);
-  min-height: 60vh;
-  margin: 40px auto;
-  padding: 24px;
-  border-radius: 12px;
-  box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+  justify-content: space-around;
 }
 
-/* Título estilão Rock Salt */
-.tituloRock {
-  text-align: center;
-  font-family: var(--font), cursive;
-  font-size: clamp(28px, 6vw, 52px);
-  color: var(--text-color);
-  margin: 0 0 12px 0;
-}
-
-/* Form do jogador (usaremos o mesmo id) */
-:global(#form-jogador) {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 12px;
-  justify-content: center;
-}
-:global(.container) > :global(#form-jogador) > :global(input) {
-  padding: 10px;
-  width: min(420px, 100%);
-  border: 1px solid #ccc;
-  border-radius: 6px; 
-  background: rgba(233, 255, 227, 1);
-}
-:global(.container) > :global(#form-jogador) > :global(input::placeholder) {
-  text-align: center;
-}
-:global(.container) > :global(#form-jogador) > :global(button) {
-  padding: 10px 16px;
-}
-
-/* Timer fixo */
-:global(#Timer) {
-  position: fixed;
-  top: 0;
-  left: 0;
-  background-color: var(--background-color);
-  width: 200px;
-  height: 70px;
+.containerDna{
   display: flex;
   align-items: center;
-  justify-content: center;
-  border-radius: 0 0 10px 0;
-  z-index: 1000;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.2);
-}
-:global(.timerText) {
-  color: var(--text-color);
-  font-family: var(--font), cursive;
-  font-size: 1.7em;
-  font-weight: bold; 
-  margin: 0 auto;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
-/* ---------- Header/rodapé do seu layout original ---------- */
-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  min-height: 64px;
+.containerDna > img{
+  width: 40px;
 }
-.containerDna {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-.iconDna { width: 40px; height: 30px; }
-.containerDna > p {
+
+.containerDna > p{
   font-family: var(--fonte-titulo);
-  font-size: 1.4em;
-  color: gray;
-  margin: 0;
+  font-weight: bold;
 }
-.containerTimer { display: flex; align-items: center; gap: 8px; }
-.iconTimer { width: 30px; height: 30px; }
 
-.containerIcon {
-  margin: 12px 0 8px 0;
+.containerTimer > img{
+  width: 30px;
+}
+
+/*--- Main ---*/
+
+.iconCerebro{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background-color: #E5E7EB;
+  width: 60px;
+  height: 60px;
+  margin: 60px auto 30px;
+  border-radius: 50%;
+}
+
+main{
+  flex: 1;
+}
+
+main > div > img{
+  width: 50px;
+}
+
+.titulo_subtitulo > h1{
   text-align: center;
-}
-.containerIcon h1 {
   font-family: var(--fonte-titulo);
-  font-weight: 300;
-  font-size: 1.8em;
-  margin: 0 0 6px 0;
+  font-weight: lighter;
 }
-.containerIcon p {
+
+.titulo_subtitulo > p{
+  color: rgba(0, 0, 0, 0.7);
   font-family: var(--fonte-normal);
-  font-size: .95em;
-  color: rgba(0,0,0,.7);
-  margin: 0;
+  text-align: center;
 }
 
-/* ---------- Área do Quiz (Random) ---------- */
-.quizWrapper {
-  width: 100%;
-  margin-top: 8px;
-}
-
-.perguntaCard {
-  background: #ffffff;
-  border: 1px solid #e5e7eb;
-  border-radius: 10px;
-  padding: 14px;
-  margin-bottom: 12px;
-  box-shadow: 0 6px 18px rgba(0,0,0,0.06);
-}
-.perguntaCard h3 {
-  margin: 0 0 10px 0;
-  font-family: var(--fonte-titulo);
-  font-weight: 600;
-  color: #111827;
-}
-
-.opcoes {
+.containerForm{
   display: flex;
   flex-direction: column;
-  gap: 8px;
-}
-
-/* Botões bonitos, centralizados no card, estilo do outro questionário */
-.opcao {
-  display: block;
-  width: 100%;
-  padding: 12px 14px;
-  margin: 0;
-  background: #e9e9e9;
-  border: 2px solid #d1d5db;
-  border-radius: 10px;
-  cursor: pointer;
-  color: rgb(0, 151, 0);
-  font-size: 16px;
-  text-align: left;
-  transition: background-color .15s ease, border-color .15s ease, transform .06s ease, box-shadow .12s ease;
-}
-.opcao:hover:not(:disabled) {
-  background: #ddd;
-  border-color: #9ca3af;
-  box-shadow: 0 6px 18px rgba(0,0,0,0.07);
-}
-.opcao:active:not(:disabled) { transform: translateY(1px); }
-.opcao:disabled { cursor: not-allowed; opacity: .95; }
-
-/* estados de resposta (verde/vermelho) */
-.correto {
-  background-color: #22c55e !important;
-  color: #fff !important;
-  border-color: #16a34a !important;
-}
-.errado {
-  background-color: #ef4444 !important;
-  color: #fff !important;
-  border-color: #dc2626 !important;
-}
-
-/* Botão finalizar */
-.footerQuiz {
-  display: flex;
-  justify-content: center;
-  margin-top: 16px;
-}
-.buttonSubmit {
-  padding: 12px 16px;
-  min-width: 260px;
-  border: none;
-  border-radius: 10px;
-  background: #007bff;
-  color: #fff;
-  font-weight: 700;
-  cursor: pointer;
-  transition: transform .06s, box-shadow .12s, opacity .12s;
-  box-shadow: 0 10px 22px rgba(0,0,0,0.12);
-}
-.buttonSubmit:hover { background: #0056b3; }
-.buttonSubmit:active { transform: translateY(1px); }
-.buttonSubmit:disabled { opacity: .6; cursor: not-allowed; }
-
-/* Rodapé */
-.containerFooter {
-  display: flex;
-  justify-content: space-between;
   align-items: center;
-  margin-top: 12px;
 }
 
-/* Responsivo */
-@media (max-width: 640px) {
-  .container { margin: 20px auto; padding: 16px; }
-  .perguntaCard { padding: 12px; }
+button{
+  display: block;
+  width: 320px;
+  height: 40px;
+  border-radius: 16px;
+  background-color: var(--cor-azul-petroleo);
+  color: white;
+  font-family: var(--fonte-normal);
+  font-weight: bolder;
+  
+  border: none;
+  margin: 15px auto 20px;
 }

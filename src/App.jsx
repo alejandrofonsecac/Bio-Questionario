@@ -2,7 +2,7 @@ import { useState } from 'react'
 import Random from './_components/Random.jsx'
 import style from './style.module.css'
 
-import { Error, Help } from "@mui/icons-material";
+import { Error, Help} from "@mui/icons-material";
 
 function App() {
   const [name, setName] = useState('')
@@ -224,51 +224,54 @@ function App() {
             <img src="/dna.png" alt="Icone de DNA" className={style.iconDna}/>
             <p>BiologyQuiz</p>
           </div>
+
           <div className={style.containerTimer}>
             <img src="/relogio.png" alt="Icone de relogio" className={style.iconTimer} />
-            {/* Exemplo de timer fixo; substitua por componente se quiser */}
             <div id="Timer">
-              <span className="timerText">05:00</span>
+              <p className={style.timerText}></p>
             </div>
           </div>
         </header>
 
 
         <main>
-            <div className={style.containerIcon}>
+            <div className={style.iconCerebro}>
               <img src="../../public/cerebro.png" alt="Icone de Cerebro"/>
             </div>
 
-            <h1>Quiz de Evolução Humana</h1>
-            <p>Teste seus conhecimentos sobre a evolução da espécie humana</p>
-        </main>
-        <div className={style.containerIcon}>
-          <h1 className={style.tituloRock}>Quiz de Evolução Humana</h1>
-          <p>Teste seus conhecimentos sobre a evolução da espécie humana</p>
-        </div>
 
-        {/* TELA INICIAL: aparece até clicar no botão */}
-        {!started && (
-          <form id="form-jogador" onSubmit={handleStart}>
-            <input
-              type="text"
-              id="inome"
-              placeholder="Seu nome"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
+            <div className={style.containerForm}>
+              <div className={style.titulo_subtitulo}>
+                <h1>Quiz de Evolução <br/> Humana</h1>
+                <p>Teste seus conhecimentos sobre a evolução da <br/> espécie
+                humana</p>
+              </div>
+                      
+              
+                        {/* TELA INICIAL: aparece até clicar no botão */}
+                        {!started && (
+              <form id="form-jogador" onSubmit={handleStart}>
+                <input
+                  type="text"
+                  id="inome"
+                  placeholder="Seu nome"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                />
+                <button type="submit">Iniciar Quiz</button>
+              </form>
+                        )}
+            </div>
+
+          {/* QUIZ: aparece após clicar em "Iniciar Quiz" */}
+          {started && (
+            <Random
+              perguntas={perguntas}
+              nome={name}
+              onFinish={handleFinish}
             />
-            <button type="submit">Iniciar Quiz</button>
-          </form>
-        )}
-
-        {/* QUIZ: aparece após clicar em "Iniciar Quiz" */}
-        {started && (
-          <Random
-            perguntas={perguntas}
-            nome={name}
-            onFinish={handleFinish}
-          />
-        )}
+          )}
+        </main>
 
         <footer className={style.containerFooter}>
           <p>© 2025 BiologyQuiz. Ferramenta Educacional</p>
