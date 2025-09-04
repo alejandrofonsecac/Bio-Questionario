@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import style from './style.module.css';
+import style from '../../style.module.css';
 
 function RankingPage() {
   const [ranking, setRanking] = useState([]);
