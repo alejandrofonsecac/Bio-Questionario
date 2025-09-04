@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Random from './_components/Random.jsx'
 import style from './style.module.css'
 
@@ -8,6 +8,10 @@ function App() {
   const [name, setName] = useState('')
   const [started, setStarted] = useState(false)
   const [startedAt, setStartedAt] = useState(null)
+  const [showRanking, setShowRanking] = useState(false) // Novo estado para controlar a exibição do ranking
+  const [rankingData, setRankingData] = useState([]) // Estado para armazenar os dados do ranking
+  const [loadingRanking, setLoadingRanking] = useState(false)
+  const [rankingError, setRankingError] = useState(null)
 
   const perguntas = [
     {
@@ -168,54 +172,76 @@ function App() {
     if (!nome) return
     setStartedAt(new Date().toISOString())
     setStarted(true) // <- Mostra o quiz
+    setShowRanking(false) // Garante que o ranking não está visível ao iniciar o quiz
+  }
+
+  async function fetchRanking() {
+    setLoadingRanking(true);
+    setRankingError(null);
+    try {
+      const res = await fetch("http://localhost:5001/ranking");
+      if (!res.ok) {
+        throw new Error(`HTTP error! status: ${res.status}`);
+      }
+      const data = await res.json();
+      setRankingData(data);
+    } catch (e) {
+      setRankingError(e.message);
+    } finally {
+      setLoadingRanking(false);
+    }
   }
 
   // (Opcional) Enviar resultado ao finalizar
- async function handleFinish({ score, total }) {
-  const finishedAt = new Date().toISOString()
-  const durationSeconds = (new Date(finishedAt) - new Date(startedAt)) / 1000
+  async function handleFinish({ score, total }) {
+    const finishedAt = new Date().toISOString()
+    const durationSeconds = (new Date(finishedAt) - new Date(startedAt)) / 1000
 
-  const payload = {
-    nome: name,
-    score,
-    total,
-    durationSeconds,
-    startedAt,
-    finishedAt,
-  }
-
-  let res, body
-  try {
-    res = await fetch("http://localhost:5001/salvar_resultado", { // use URL absoluta no dev
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload),
-    })
-
-    // Parse seguro (JSON se houver; senão, texto)
-    const ct = res.headers.get("content-type") || ""
-    if (ct.includes("application/json")) {
-      body = await res.json()
-    } else {
-      const text = await res.text()
-      // tente JSON; se não der, mantém texto
-      try { body = JSON.parse(text) } catch { body = { raw: text } }
+    const payload = {
+      nome: name,
+      score,
+      total,
+      durationSeconds,
+      startedAt,
+      finishedAt,
     }
-  } catch (e) {
-    alert("Falha de rede ou CORS: " + (e?.message || e))
-    return
+
+    let res, body
+    try {
+      res = await fetch("http://localhost:5001/salvar_resultado", { // use URL absoluta no dev
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      })
+
+      // Parse seguro (JSON se houver; senão, texto)
+      const ct = res.headers.get("content-type") || ""
+      if (ct.includes("application/json")) {
+        body = await res.json()
+      } else {
+        const text = await res.text()
+        // tente JSON; se não der, mantém texto
+        try { body = JSON.parse(text) } catch { body = { raw: text } }
+      }
+    } catch (e) {
+      alert("Falha de rede ou CORS: " + (e?.message || e))
+      return
+    }
+
+    if (!res.ok || (body && body.sucesso === false)) {
+      const msg = (body && (body.erro || body.message)) || `HTTP ${res.status}`
+      alert("Erro ao enviar: " + msg)
+      return
+    }
+
+    const id = body?.id || "(sem id)"
+    alert(`Enviado! id: ${id}`)
+
+    // Após enviar o resultado, oculta o quiz e mostra o ranking
+    setStarted(false);
+    await fetchRanking(); // Busca os dados do ranking atualizados
+    setShowRanking(true);
   }
-
-  if (!res.ok || (body && body.sucesso === false)) {
-    const msg = (body && (body.erro || body.message)) || `HTTP ${res.status}`
-    alert("Erro ao enviar: " + msg)
-    return
-  }
-
-  const id = body?.id || "(sem id)"
-  alert(`Enviado! id: ${id}`)
-}
-
 
   return (
     <>
@@ -249,7 +275,7 @@ function App() {
                       
               
                         {/* TELA INICIAL: aparece até clicar no botão */}
-                        {!started && (
+                        {!started && !showRanking && (
               <form id="form-jogador" onSubmit={handleStart}>
                 <input
                   type="text"
@@ -263,13 +289,53 @@ function App() {
                         )}
             </div>
 
-          {/* QUIZ: aparece após clicar em "Iniciar Quiz" */}
-          {started && (
+          {/* QUIZ: aparece após clicar em "Iniciar Quiz" e enquanto o ranking não é exibido */}
+          {started && !showRanking && (
             <Random
               perguntas={perguntas}
               nome={name}
               onFinish={handleFinish}
             />
+          )}
+
+          {/* RANKING: aparece após finalizar o quiz */}
+          {showRanking && (
+            <div className={style.rankingContainer}>
+              <h1>Ranking dos Resultados</h1>
+              {loadingRanking ? (
+                <p>Carregando ranking...</p>
+              ) : rankingError ? (
+                <p>Erro ao carregar ranking: {rankingError}</p>
+              ) : rankingData.length === 0 ? (
+                <p>Nenhum resultado disponível ainda.</p>
+              ) : (
+                <table className={style.rankingTable}>
+                  <thead>
+                    <tr>
+                      <th>Posição</th>
+                      <th>Nome</th>
+                      <th>Pontuação</th>
+                      <th>Tempo (segundos)</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {rankingData.map((item, index) => (
+                      <tr key={item.id}>
+                        <td>{index + 1}</td>
+                        <td>{item.nome}</td>
+                        <td>{item.score}/{item.total}</td>
+                        <td>{item.durationSeconds.toFixed(2)}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              )}
+              <button onClick={() => {
+                setStarted(false);
+                setShowRanking(false);
+                setName('');
+              }} className={style.buttonSubmit}>Voltar ao Início</button>
+            </div>
           )}
         </main>
 
@@ -290,3 +356,5 @@ function App() {
 }
 
 export default App;
+
+

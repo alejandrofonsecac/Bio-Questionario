@@ -70,6 +70,29 @@ def salvar_resultado():
     ref = db.collection("quizResults").add(doc)
     return jsonify({"sucesso": True, "id": ref[1].id, "echo": dados})
 
+# --- rota /ranking ---
+@app.route("/ranking", methods=["GET"])
+def get_ranking():
+    try:
+        # Busca todos os resultados ordenados por score (decrescente) e depois por tempo (crescente)
+        results = db.collection("quizResults").order_by("score", direction=firestore.Query.DESCENDING).order_by("durationSeconds", direction=firestore.Query.ASCENDING).limit(10).stream()
+        
+        ranking_data = []
+        for doc in results:
+            data = doc.to_dict()
+            ranking_data.append({
+                "id": doc.id,
+                "nome": data.get("name", ""),
+                "score": data.get("score", 0),
+                "total": data.get("total", 0),
+                "durationSeconds": data.get("durationSeconds", 0)
+            })
+        
+        return jsonify(ranking_data)
+    except Exception as e:
+        print(f"Erro ao buscar ranking: {e}")
+        return jsonify({"sucesso": False, "erro": "Erro ao buscar ranking"}), 500
+
 # --- handlers de erro para sempre devolver JSON ---
 @app.errorhandler(404)
 def nf(e): return jsonify({"sucesso": False, "erro": "Rota não encontrada"}), 404
