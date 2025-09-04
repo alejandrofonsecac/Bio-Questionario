@@ -235,7 +235,7 @@ function App() {
     }
 
     const id = body?.id || "(sem id)"
-    alert(`Enviado! id: ${id}`)
+   
 
     // Após enviar o resultado, oculta o quiz e mostra o ranking
     setStarted(false);

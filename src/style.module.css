@@ -102,3 +102,52 @@ button{
   border: none;
   margin: 15px auto 20px;
 }
+
+/* --- Estilos para o ranking --- */
+.rankingContainer {
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 20px;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+}
+
+.rankingContainer h1 {
+  text-align: center;
+  font-family: var(--fonte-titulo);
+  color: var(--cor-azul-petroleo);
+  margin-bottom: 20px;
+}
+
+.rankingTable {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+.rankingTable th,
+.rankingTable td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.rankingTable th {
+  background-color: var(--cor-verde-esmeralda);
+  color: white;
+  font-family: var(--fonte-titulo);
+  font-weight: 600;
+}
+
+.rankingTable tbody tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.rankingTable tbody tr:hover {
+  background-color: #f0f0f0;
+}
+
+.rankingTable td {
+  font-family: var(--fonte-normal);
+}
