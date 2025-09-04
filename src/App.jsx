@@ -266,21 +266,24 @@ function App() {
             </div>
 
 
-            <div className={style.containerForm}>
+            
               <div className={style.titulo_subtitulo}>
                 <h1>Quiz de Evolução <br/> Humana</h1>
                 <p>Teste seus conhecimentos sobre a evolução da <br/> espécie
                 humana</p>
               </div>
                       
-              
+            <div className={style.containerForm}>
                         {/* TELA INICIAL: aparece até clicar no botão */}
                         {!started && !showRanking && (
               <form id="form-jogador" onSubmit={handleStart}>
+                <label htmlFor="inome">
+                  Digite seu nome:
+                </label>
                 <input
                   type="text"
                   id="inome"
-                  placeholder="Seu nome"
+                  
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                 />
@@ -347,7 +350,7 @@ function App() {
               <Help/>
             </div>
             <div className={style.iconeExclamacao}>
-              <Error/>              
+              <Error style={{}}/>              
             </div>
           </div>
         </footer>
