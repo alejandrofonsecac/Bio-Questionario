@@ -339,11 +339,23 @@ function App() {
           <footer className={style.containerFooter}>
             <p>© 2025 BiologyQuiz. Ferramenta Educacional</p>
             <div className={style.containerIcons}>
-              <div className={style.iconeInterrogacao}>
-                <Help/>
+              <div className={style.iconWrap}>
+                <Help />
+                <div className={style.tooltip}>
+                  <p style={{margin:0, fontWeight:600}}>Desenvolvido por:</p>
+                  <span>Francisco</span><br />
+                  <span>Jorge</span><br />
+                  <span>Christofer</span><br />
+                  <span>Kauan</span><br />
+                </div>
               </div>
-              <div className={style.iconeExclamacao}>
-                <Error style={{}}/>
+
+              <div className={style.iconWrap}>
+                <Error />
+                <div className={style.tooltip}>
+                  <p style={{margin:0, fontWeight:600}}   >coisa do ponto de exclamacao</p>
+                  <span>blablabla</span>
+              </div>
               </div>
             </div>
           </footer>

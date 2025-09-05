@@ -205,3 +205,63 @@ footer{
 .rankingTable td {
   font-family: var(--fonte-normal);
 }
+
+svg:hover {
+  transform: scale(1.3);
+  transition: 1.2s;
+}
+
+.containerIcons {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+
+.iconWrap {
+  position: relative;           
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.iconWrap :where(svg, img) { display: block; pointer-events: none; }
+
+.tooltip {
+  position: absolute;
+  left: 50%;
+  bottom: calc(100% + 8px);     
+  transform: translateX(-50%) translateY(4px);
+  background: #111827;
+  color: #fff;
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-size: 14px;
+  line-height: 1.2;
+  white-space: nowrap;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.16);
+  z-index: 9999;
+
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity .2s ease, transform .2s ease, visibility .2s;
+  pointer-events: none;         
+}
+
+
+.tooltip::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 6px solid transparent;
+  border-top-color: #111827;    
+}
+
+
+.iconWrap:hover .tooltip {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(0);
+}
