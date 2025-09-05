@@ -245,115 +245,108 @@ function App() {
 
   return (
     <>
-        <header>
-          <div className={style.containerDna}>
-            <img src="/dna.png" alt="Icone de DNA" className={style.iconDna}/>
-            <p>BiologyQuiz</p>
-          </div>
-
-          <div className={style.containerTimer}>
-            <img src="/relogio.png" alt="Icone de relogio" className={style.iconTimer} />
-            <div id="Timer">
-              <p className={style.timerText}></p>
+        <div className={style.containerAll}>
+          <header>
+            <div className={style.containerDna}>
+              <img src="/dna.png" alt="Icone de DNA" className={style.iconDna}/>
+              <p>BiologyQuiz</p>
             </div>
-          </div>
-        </header>
-
-
-        <main>
-            <div className={style.iconCerebro}>
-              <img src="../../public/cerebro.png" alt="Icone de Cerebro"/>
-            </div>
-
-
-            
-              <div className={style.titulo_subtitulo}>
-                <h1>Quiz de Evolução <br/> Humana</h1>
-                <p>Teste seus conhecimentos sobre a evolução da <br/> espécie
-                humana</p>
+            <div className={style.containerTimer}>
+              <img src="/relogio.png" alt="Icone de relogio" className={style.iconTimer} />
+              <div id="Timer">
+                <p className={style.timerText}></p>
               </div>
-                      
-            <div className={style.containerForm}>
-                        {/* TELA INICIAL: aparece até clicar no botão */}
-                        {!started && !showRanking && (
-              <form id="form-jogador" onSubmit={handleStart}>
-                <label htmlFor="inome">
-                  Digite seu nome:
-                </label>
-                <input
-                  type="text"
-                  id="inome"
-                  
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                />
-                <button type="submit">Iniciar Quiz</button>
-              </form>
-                        )}
             </div>
-
-          {/* QUIZ: aparece após clicar em "Iniciar Quiz" e enquanto o ranking não é exibido */}
-          {started && !showRanking && (
-            <Random
-              perguntas={perguntas}
-              nome={name}
-              onFinish={handleFinish}
-            />
-          )}
-
-          {/* RANKING: aparece após finalizar o quiz */}
-          {showRanking && (
-            <div className={style.rankingContainer}>
-              <h1>Ranking dos Resultados</h1>
-              {loadingRanking ? (
-                <p>Carregando ranking...</p>
-              ) : rankingError ? (
-                <p>Erro ao carregar ranking: {rankingError}</p>
-              ) : rankingData.length === 0 ? (
-                <p>Nenhum resultado disponível ainda.</p>
-              ) : (
-                <table className={style.rankingTable}>
-                  <thead>
-                    <tr>
-                      <th>Posição</th>
-                      <th>Nome</th>
-                      <th>Pontuação</th>
-                      <th>Tempo (segundos)</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {rankingData.map((item, index) => (
-                      <tr key={item.id}>
-                        <td>{index + 1}</td>
-                        <td>{item.nome}</td>
-                        <td>{item.score}/{item.total}</td>
-                        <td>{item.durationSeconds.toFixed(2)}</td>
+          </header>
+          <main>
+              <div className={style.iconCerebro}>
+                <img src="../../public/cerebro.png" alt="Icone de Cerebro"/>
+              </div>
+          
+                <div className={style.titulo_subtitulo}>
+                  <h1>Quiz de Evolução <br/> Humana</h1>
+                  <p>Teste seus conhecimentos sobre a evolução da <br/> espécie
+                  humana</p>
+                </div>
+          
+              <div className={style.containerForm}>
+                          {/* TELA INICIAL: aparece até clicar no botão */}
+                          {!started && !showRanking && (
+                <form id="form-jogador" onSubmit={handleStart}>
+                  <label htmlFor="inome">
+                    Digite seu nome:
+                  </label>
+                  <input
+                    type="text"
+                    id="inome"
+          
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                  />
+                  <button type="submit">Iniciar Quiz</button>
+                </form>
+                          )}
+              </div>
+            {/* QUIZ: aparece após clicar em "Iniciar Quiz" e enquanto o ranking não é exibido */}
+            {started && !showRanking && (
+              <Random
+                perguntas={perguntas}
+                nome={name}
+                onFinish={handleFinish}
+              />
+            )}
+            {/* RANKING: aparece após finalizar o quiz */}
+            {showRanking && (
+              <div className={style.rankingContainer}>
+                <h1>Ranking dos Resultados</h1>
+                {loadingRanking ? (
+                  <p>Carregando ranking...</p>
+                ) : rankingError ? (
+                  <p>Erro ao carregar ranking: {rankingError}</p>
+                ) : rankingData.length === 0 ? (
+                  <p>Nenhum resultado disponível ainda.</p>
+                ) : (
+                  <table className={style.rankingTable}>
+                    <thead>
+                      <tr>
+                        <th>Posição</th>
+                        <th>Nome</th>
+                        <th>Pontuação</th>
+                        <th>Tempo (segundos)</th>
                       </tr>
-                    ))}
-                  </tbody>
-                </table>
-              )}
-              <button onClick={() => {
-                setStarted(false);
-                setShowRanking(false);
-                setName('');
-              }} className={style.buttonSubmit}>Voltar ao Início</button>
+                    </thead>
+                    <tbody>
+                      {rankingData.map((item, index) => (
+                        <tr key={item.id}>
+                          <td>{index + 1}</td>
+                          <td>{item.nome}</td>
+                          <td>{item.score}/{item.total}</td>
+                          <td>{item.durationSeconds.toFixed(2)}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                )}
+                <button onClick={() => {
+                  setStarted(false);
+                  setShowRanking(false);
+                  setName('');
+                }} className={style.buttonSubmit}>Voltar ao Início</button>
+              </div>
+            )}
+          </main>
+          <footer className={style.containerFooter}>
+            <p>© 2025 BiologyQuiz. Ferramenta Educacional</p>
+            <div className={style.containerIcons}>
+              <div className={style.iconeInterrogacao}>
+                <Help/>
+              </div>
+              <div className={style.iconeExclamacao}>
+                <Error style={{}}/>
+              </div>
             </div>
-          )}
-        </main>
-
-        <footer className={style.containerFooter}>
-          <p>© 2025 BiologyQuiz. Ferramenta Educacional</p>
-
-          <div className={style.containerIcons}>
-            <div className={style.iconeInterrogacao}>
-              <Help/>
-            </div>
-            <div className={style.iconeExclamacao}>
-              <Error style={{}}/>              
-            </div>
-          </div>
-        </footer>
+          </footer>
+        </div>
     </>
   )
 }
