@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import Random from './_components/Random.jsx'
+import Timer from './_components/Timer.jsx'
 import style from './style.module.css'
 
 import { Error, Help} from "@mui/icons-material";
@@ -254,7 +255,7 @@ function App() {
             <div className={style.containerTimer}>
               <img src="/relogio.png" alt="Icone de relogio" className={style.iconTimer} />
               <div id="Timer">
-                <p className={style.timerText}></p>
+                <Timer/>
               </div>
             </div>
           </header>
