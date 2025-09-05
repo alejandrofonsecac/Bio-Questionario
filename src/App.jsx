@@ -15,9 +15,13 @@ function App() {
   const [rankingError, setRankingError] = useState(null)
 
   const [isQuizStarted, setIsQuizStarted] = useState(false);
+  const [timerKey, setTimerKey] = useState(0);
+  
   const handleStartQuiz = () => {
-  setIsQuizStarted(true);
-};
+    setIsQuizStarted(true);
+    const timer = document.getElementById('Timer');
+    timer.style.display = 'block';
+  };
 
   const perguntas = [
     {
@@ -260,7 +264,7 @@ function App() {
 
             <div className={style.containerTimer}>
               <img src="/relogio.png" alt="Icone de relogio" className={style.iconTimer} />
-              {isQuizStarted && <Timer />}
+              {isQuizStarted && <Timer key={timerKey} />}
             </div>            
           </header>
 
@@ -337,7 +341,9 @@ function App() {
                 <button onClick={() => {
                   setStarted(false);
                   setShowRanking(false);
-                  setName('');
+                  setName("");
+                  setIsQuizStarted(false);
+                  setTimerKey(prev => prev + 1);
                 }} className={style.buttonSubmit}>Voltar ao Início</button>
               </div>
             )}
@@ -357,7 +363,9 @@ function App() {
               <div className={style.iconWrap}>
                 <Error />
                 <div className={style.tooltip}>
-                  
+                  <a href="https://github.com/FranciscoCristofolini26" target="_blank">
+                    <p style={{margin:0, fontWeight:600, color: 'white'}}   >Francisco Cristofolini</p>
+                  </a>
                   <a href="https://github.com/alejandrofonsecac" target="_blank">
                     <p style={{margin:0, fontWeight:600, color: 'white'}}   >Alejandro Fonseca</p>
                   </a>

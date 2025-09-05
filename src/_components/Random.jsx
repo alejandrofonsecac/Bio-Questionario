@@ -40,6 +40,9 @@ function Random({ perguntas, onFinish, nome, disabled }) {
     const score = rows.filter(r => r.isCorrect).length;
     const total = perguntasSelecionadas.length;
     onFinish({ rows, score, total });
+
+    const timer = document.getElementById('Timer');
+    timer.style.display = 'none';
   }
 
   return (

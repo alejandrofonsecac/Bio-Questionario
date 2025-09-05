@@ -19,7 +19,7 @@ function Timer() {
 
         // Função de limpeza para evitar vazamento de memória
         return () => clearInterval(timerInterval);
-    }, [timeLeft]); // A dependência garante que o efeito seja executado a cada mudança em `timeLeft`
+    }, [timeLeft]);
 
     const minutes = Math.floor(timeLeft / 60);
     const seconds = timeLeft % 60;
