@@ -83,7 +83,9 @@ main{
   flex: 1;
 }
 
-.iconCerebro{
+
+
+.iconCerebro {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -94,6 +96,13 @@ main{
   margin: 60px auto 30px;
   border-radius: 50%;
 }
+
+.iconCerebro > img {
+  width: 40px;
+  margin-bottom: 20px;
+  margin-left: 5px;
+}
+
 
 main > div > img{
   width: 50px;
@@ -144,6 +153,7 @@ button{
 button:hover{
   transform: scale(0.95);
   transition: 0.3s;
+  
 }
 
 /*--- Footer ---*/

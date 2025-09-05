@@ -1,5 +1,6 @@
 import React, { useState, useMemo } from "react";
 import style from '../../main.module.css';
+import script from '../Oneclick.js';
 
 function Random({ perguntas, onFinish, nome, disabled }) {
   const [respostas, setRespostas] = useState({});
@@ -92,7 +93,10 @@ function Random({ perguntas, onFinish, nome, disabled }) {
         <div style={{ display: 'flex', justifyContent: 'center', marginTop: 16 }}>
           <button
             className={style.buttonSubmit}
-            onClick={finalizarEnvio}
+            onClick={() => {
+              finalizarEnvio();
+              Oneclick();
+            }}
             disabled={!todasRespondidas || disabled}
             title={!todasRespondidas ? 'Responda todas as questões' : 'Enviar respostas'}
           >

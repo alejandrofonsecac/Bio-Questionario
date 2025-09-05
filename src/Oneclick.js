@@ -6,3 +6,5 @@ function Oneclick(){
         console.log("O evento foi acionado pela primeira vez!");
     }
 }
+
+export default Oneclick;
