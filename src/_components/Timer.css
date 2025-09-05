@@ -1,0 +1,24 @@
+@charset "UTF-8";
+
+:root {
+  /* Tipografias */
+  --fonte-titulo: 'Montserrat', sans-serif;
+  --fonte-normal: 'Roboto', sans-serif;
+
+  /* Paleta de cores */
+  --cor-azul-petroleo: #111827;
+  --cor-verde-esmeralda: #3bb273;
+  --cor-amarelo-suave: #f1c40f;
+  --cor-cinza-claro: #f4f4f4;
+  --cor-branco: #ffffff;
+}
+
+#Timer{
+    display: flex;
+}
+
+#Timer > p{
+    font-family: var(--fonte-normal);
+    font-weight: bold;
+    color: rgba(0, 0, 0, 0.7);
+}

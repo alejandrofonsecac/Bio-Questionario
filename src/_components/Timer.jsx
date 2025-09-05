@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from 'react';
+import './Timer.css'
 
 function Timer() {
-    const [timeLeft, setTimeLeft] = useState(300); // 5 minutos em segundos
+    const [timeLeft, setTimeLeft] = useState(180); 
     const [isTimeUp, setIsTimeUp] = useState(false);
 
     useEffect(() => {
         if (timeLeft <= 0) {
             setIsTimeUp(true);
-            return; // Interrompe o efeito se o tempo acabou
+            alert('O tempo esgotou')
+            return; 
         }
 
         // Configura o intervalo para decrementar o tempo a cada segundo
@@ -24,7 +26,7 @@ function Timer() {
 
     return (
         <div id="Timer">
-            <p className={style.timerText}>
+            <p>
                 {isTimeUp ? 'Tempo esgotado!' : `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`}
             </p>
         </div>

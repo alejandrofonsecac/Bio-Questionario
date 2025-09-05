@@ -1,5 +1,5 @@
 import React, { useState, useMemo } from "react";
-import style from '../../style.module.css';
+import style from '../../main.module.css';
 
 function Random({ perguntas, onFinish, nome, disabled }) {
   const [respostas, setRespostas] = useState({});

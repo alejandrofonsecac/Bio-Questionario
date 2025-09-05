@@ -63,10 +63,16 @@ header{
   font-weight: bold;
 }
 
+.containerTimer{
+  display: flex;
+  align-items: flex-end;
+  margin-right: 90px;
+}
+
 .containerTimer > img{
   width: 22px;
   margin-top: 20px;
-  margin-right: 90px;
+  margin-right: 5px;
 }
 
 /*--- Main ---*/
@@ -218,19 +224,22 @@ svg:hover {
 }
 
 .iconWrap {
-  position: relative;           
+  position: relative;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
 }
 
-.iconWrap :where(svg, img) { display: block; pointer-events: none; }
+.iconWrap :where(svg, img) {
+  display: block;
+  pointer-events: none;
+}
 
 .tooltip {
   position: absolute;
   left: 50%;
-  bottom: calc(100% + 8px);     
+  bottom: calc(100% + 4px); /* Reduzi o espaçamento para 4px */
   transform: translateX(-50%) translateY(4px);
   background: #111827;
   color: #fff;
@@ -239,15 +248,13 @@ svg:hover {
   font-size: 14px;
   line-height: 1.2;
   white-space: nowrap;
-  box-shadow: 0 8px 24px rgba(0,0,0,0.16);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.16);
   z-index: 9999;
-
   opacity: 0;
   visibility: hidden;
-  transition: opacity .2s ease, transform .2s ease, visibility .2s;
-  pointer-events: none;         
+  transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s;
+  pointer-events: none;
 }
-
 
 .tooltip::after {
   content: "";
@@ -256,12 +263,12 @@ svg:hover {
   left: 50%;
   transform: translateX(-50%);
   border: 6px solid transparent;
-  border-top-color: #111827;    
+  border-top-color: #111827;
 }
-
 
 .iconWrap:hover .tooltip {
   opacity: 1;
   visibility: visible;
   transform: translateX(-50%) translateY(0);
+  pointer-events: auto; /* Adicionado para permitir interações com o tooltip */
 }

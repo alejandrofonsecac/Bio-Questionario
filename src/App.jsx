@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import Random from './_components/Random.jsx'
-import Timer from './_components/Timer.jsx'
 import style from './style.module.css'
+import Timer from './_components/Timer.jsx'
 
 import { Error, Help} from "@mui/icons-material";
 
@@ -252,13 +252,13 @@ function App() {
               <img src="/dna.png" alt="Icone de DNA" className={style.iconDna}/>
               <p>BiologyQuiz</p>
             </div>
+
             <div className={style.containerTimer}>
               <img src="/relogio.png" alt="Icone de relogio" className={style.iconTimer} />
-              <div id="Timer">
-                <Timer/>
-              </div>
-            </div>
+              <Timer/>
+            </div>            
           </header>
+
           <main>
               <div className={style.iconCerebro}>
                 <img src="../../public/cerebro.png" alt="Icone de Cerebro"/>
@@ -344,17 +344,17 @@ function App() {
                 <div className={style.tooltip}>
                   <p style={{margin:0, fontWeight:600}}>Desenvolvido por:</p>
                   <span>Francisco</span><br />
-                  <span>Jorge</span><br />
-                  <span>Christofer</span><br />
-                  <span>Kauan</span><br />
+                  <span>Jorge Alejandro</span><br />
                 </div>
               </div>
 
               <div className={style.iconWrap}>
                 <Error />
                 <div className={style.tooltip}>
-                  <p style={{margin:0, fontWeight:600}}   >coisa do ponto de exclamacao</p>
-                  <span>blablabla</span>
+                  
+                  <a href="https://github.com/alejandrofonsecac" target="_blank">
+                    <p style={{margin:0, fontWeight:600, color: 'white'}}   >Alejandro Fonseca</p>
+                  </a>
               </div>
               </div>
             </div>
