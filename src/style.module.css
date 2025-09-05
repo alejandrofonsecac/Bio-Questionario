@@ -48,8 +48,9 @@ header{
 
 .containerDna{
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   margin-top: 20px;
+  margin-left: 0px;
 }
 
 .containerDna > img{
