@@ -14,6 +14,11 @@ function App() {
   const [loadingRanking, setLoadingRanking] = useState(false)
   const [rankingError, setRankingError] = useState(null)
 
+  const [isQuizStarted, setIsQuizStarted] = useState(false);
+  const handleStartQuiz = () => {
+  setIsQuizStarted(true);
+};
+
   const perguntas = [
     {
       id: 1,
@@ -255,7 +260,7 @@ function App() {
 
             <div className={style.containerTimer}>
               <img src="/relogio.png" alt="Icone de relogio" className={style.iconTimer} />
-              <Timer/>
+              {isQuizStarted && <Timer />}
             </div>            
           </header>
 
@@ -272,6 +277,7 @@ function App() {
           
               <div className={style.containerForm}>
                           {/* TELA INICIAL: aparece até clicar no botão */}
+
                           {!started && !showRanking && (
                 <form id="form-jogador" onSubmit={handleStart}>
                   <label htmlFor="inome">
@@ -284,7 +290,7 @@ function App() {
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                   />
-                  <button type="submit">Iniciar Quiz</button>
+                  <button type="submit" onClick={handleStartQuiz}>Iniciar Quiz</button>
                 </form>
                           )}
               </div>

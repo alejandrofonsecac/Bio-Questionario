@@ -18,7 +18,20 @@
 }
 
 #Timer > p{
+  display: flex;
+  align-items: flex-end;
     font-family: var(--fonte-normal);
     font-weight: bold;
     color: rgba(0, 0, 0, 0.7);
+}
+
+.containerTimer{
+  display: flex;
+  
+  margin-right: 90px;
+}
+img{
+  width: 22px;
+  margin-top: 20px;
+  margin-right: 5px;
 }

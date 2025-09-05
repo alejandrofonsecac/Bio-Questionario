@@ -27,7 +27,10 @@ function Timer() {
     return (
         <div id="Timer">
             <p>
-                {isTimeUp ? 'Tempo esgotado!' : `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`}
+                
+                    <img src="../../public/relogio.png" alt="" />
+                    {isTimeUp ? 'Tempo esgotado!' : `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`}
+                
             </p>
         </div>
     );
