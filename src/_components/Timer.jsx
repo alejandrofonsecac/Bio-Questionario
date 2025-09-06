@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './Timer.css'
 
 function Timer() {
-    const [timeLeft, setTimeLeft] = useState(180); 
+    const [timeLeft, setTimeLeft] = useState(10); 
     const [isTimeUp, setIsTimeUp] = useState(false);
 
     useEffect(() => {

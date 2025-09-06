@@ -6,7 +6,7 @@ function Random({ perguntas, onFinish, nome, disabled }) {
 
 
 
-  const [timeLeft, setTimeLeft] = useState(15); 
+  const [timeLeft, setTimeLeft] = useState(10); 
       const [isTimeUp, setIsTimeUp] = useState(false);
   
       useEffect(() => {
@@ -77,14 +77,7 @@ function Random({ perguntas, onFinish, nome, disabled }) {
 
   return (
     <>
-    <div id="Timer">
-            <p>
-                
-                    <img src="../../public/relogio.png" alt="" />
-                    {isTimeUp ? 'Tempo esgotado!' : `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`}
-                
-            </p>
-        </div>
+    
 
     <div id="quiz" className={style.container}>
       {perguntasSelecionadas.map((pergunta, index) => (
