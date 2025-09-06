@@ -13,14 +13,18 @@ function App() {
   const [rankingData, setRankingData] = useState([]) // Estado para armazenar os dados do ranking
   const [loadingRanking, setLoadingRanking] = useState(false)
   const [rankingError, setRankingError] = useState(null)
-
-  const [isQuizStarted, setIsQuizStarted] = useState(false);
-  const [timerKey, setTimerKey] = useState(0);
-  
   const handleStartQuiz = () => {
     setIsQuizStarted(true);
     const timer = document.getElementById('Timer');
     timer.style.display = 'block';
+  };
+
+
+  //Timer
+  const [isQuizStarted, setIsQuizStarted] = useState(false);
+  const [timerKey, setTimerKey] = useState(0);
+  const handleTimeUp = () => {
+    finalizarEnvio(); 
   };
 
   const perguntas = [
@@ -264,7 +268,7 @@ function App() {
 
             <div className={style.containerTimer}>
               <img src="/relogio.png" alt="Icone de relogio" className={style.iconTimer} />
-              {isQuizStarted && <Timer key={timerKey} />}
+              {isQuizStarted && <Timer key={timerKey} onTimeUp={handleTimeUp} />}
             </div>            
           </header>
 
