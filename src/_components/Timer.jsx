@@ -9,9 +9,7 @@ function Timer() {
         if (timeLeft <= 0) {
             setIsTimeUp(true);
             alert('O tempo esgotou')
-            return () => {
-                let timeUp = false
-            }; 
+            return;
         }
 
         // Configura o intervalo para decrementar o tempo a cada segundo

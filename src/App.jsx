@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import Random from './_components/Random.jsx'
 import style from './style.module.css'
 import Timer from './_components/Timer.jsx'

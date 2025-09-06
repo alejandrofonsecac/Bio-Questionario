@@ -1,8 +1,37 @@
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import style from '../../main.module.css';
-import script from '../Oneclick.js';
 
 function Random({ perguntas, onFinish, nome, disabled }) {
+
+
+
+
+  const [timeLeft, setTimeLeft] = useState(15); 
+      const [isTimeUp, setIsTimeUp] = useState(false);
+  
+      useEffect(() => {
+          if (timeLeft <= 0) {
+              setIsTimeUp(true);
+              alert('O tempo esgotou')
+              finalizarEnvio()
+              return;
+          }
+  
+          // Configura o intervalo para decrementar o tempo a cada segundo
+          const timerInterval = setInterval(() => {
+              setTimeLeft(prevTime => prevTime - 1);
+          }, 1000);
+  
+          // Função de limpeza para evitar vazamento de memória
+          return () => clearInterval(timerInterval);
+      }, [timeLeft]);
+  
+      const minutes = Math.floor(timeLeft / 60);
+      const seconds = timeLeft % 60;
+
+
+
+
   const [respostas, setRespostas] = useState({});
 
   // Embaralha só uma vez quando o componente é montado
@@ -47,6 +76,16 @@ function Random({ perguntas, onFinish, nome, disabled }) {
   }
 
   return (
+    <>
+    <div id="Timer">
+            <p>
+                
+                    <img src="../../public/relogio.png" alt="" />
+                    {isTimeUp ? 'Tempo esgotado!' : `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`}
+                
+            </p>
+        </div>
+
     <div id="quiz" className={style.container}>
       {perguntasSelecionadas.map((pergunta, index) => (
         <div key={pergunta.id} style={{
@@ -105,6 +144,7 @@ function Random({ perguntas, onFinish, nome, disabled }) {
         </div>
       )}
     </div>
+  </>
   );
 }
 
