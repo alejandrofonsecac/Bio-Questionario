@@ -6,7 +6,7 @@ function Random({ perguntas, onFinish, nome, disabled }) {
 
 
 
-  const [timeLeft, setTimeLeft] = useState(180); 
+  const [timeLeft, setTimeLeft] = useState(10); 
       const [isTimeUp, setIsTimeUp] = useState(false);
       //Ola
   
@@ -126,7 +126,10 @@ function Random({ perguntas, onFinish, nome, disabled }) {
         <div style={{ display: 'flex', justifyContent: 'center', marginTop: 16 }}>
           <button
             className={style.buttonSubmit}
-            onClick={ finalizarEnvio() }
+            onClick={() => {
+              finalizarEnvio();
+              Oneclick();
+            }}
             disabled={!todasRespondidas || disabled}
             title={!todasRespondidas ? 'Responda todas as questões' : 'Enviar respostas'}
           >
