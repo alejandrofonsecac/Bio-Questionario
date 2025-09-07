@@ -8,6 +8,7 @@ function Random({ perguntas, onFinish, nome, disabled }) {
 
   const [timeLeft, setTimeLeft] = useState(180); 
       const [isTimeUp, setIsTimeUp] = useState(false);
+      //Ola
   
       useEffect(() => {
           if (timeLeft <= 0) {
