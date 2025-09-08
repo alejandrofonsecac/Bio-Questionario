@@ -279,8 +279,8 @@ function App() {
           
                 <div className={style.titulo_subtitulo}>
                   <h1>Quiz de Evolução <br/> Humana</h1>
-                  <p>Teste seus conhecimentos sobre a evolução da <br/> espécie
-                  humana</p>
+                  <p>A sua missão é: <br/> 
+                  Completar o quiz</p>
                 </div>
           
               <div className={style.containerForm}>
