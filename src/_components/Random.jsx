@@ -128,7 +128,6 @@ function Random({ perguntas, onFinish, nome, disabled }) {
             className={style.buttonSubmit}
             onClick={() => {
               finalizarEnvio();
-              Oneclick();
             }}
             disabled={!todasRespondidas || disabled}
             title={!todasRespondidas ? 'Responda todas as questões' : 'Enviar respostas'}

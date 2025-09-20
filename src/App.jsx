@@ -16,7 +16,6 @@ function App() {
   const handleStartQuiz = () => {
     setIsQuizStarted(true);
     const timer = document.getElementById('Timer');
-    timer.style.display = 'block';
   };
 
 
